@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/layout/home/provider/home_provider.dart';
 import 'package:todo_app/layout/login/login_screen.dart';
 import 'package:todo_app/shared/providers/auth_provider.dart';
 
@@ -10,6 +11,7 @@ class homeSreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     authprovider provider = Provider.of<authprovider>(context);
+    homeProvider providerHome = Provider.of<homeProvider>(context);
     return Scaffold(
       backgroundColor: Color(0xffdfecdb),
       appBar: AppBar(
@@ -21,6 +23,22 @@ class homeSreen extends StatelessWidget {
             icon: Icon(Icons.logout,
                 color: Theme.of(context).colorScheme.onPrimary)),
         title: Text("To Do List"),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (value) {
+          providerHome.changeCurrentIndex(value);
+        },
+        currentIndex: providerHome.currentIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.format_list_bulleted_outlined),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings_rounded),
+            label: "",
+          ),
+        ],
       ),
     );
   }

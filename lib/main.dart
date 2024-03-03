@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/firebase_options.dart';
 import 'package:todo_app/layout/home/home_screen.dart';
+import 'package:todo_app/layout/home/provider/home_provider.dart';
 import 'package:todo_app/layout/login/login_screen.dart';
 import 'package:todo_app/layout/register/register_screen.dart';
 import 'package:todo_app/layout/splach/splach_screen.dart';
@@ -35,7 +36,10 @@ class todoApp extends StatelessWidget {
       routes: {
         loginScreen.route_name: (context) => loginScreen(),
         registerScreen.route_name: (context) => registerScreen(),
-        homeSreen.route_name: (context) => homeSreen(),
+        homeSreen.route_name: (context) => ChangeNotifierProvider(
+              create: (context) => homeProvider(),
+              child: homeSreen(),
+            ),
         splachScreen.route_name: (context) => splachScreen(),
       },
       initialRoute: splachScreen.route_name,

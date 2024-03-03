@@ -8,6 +8,14 @@ class appTheme {
       primary: appColors.primryLightColor,
       onPrimary: appColors.onPrimryLightColor,
     ),
+    navigationBarTheme: NavigationBarThemeData(),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: appColors.onPrimryLightColor,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        unselectedIconTheme: IconThemeData(size: 30),
+        selectedIconTheme:
+            IconThemeData(size: 30, color: appColors.primryLightColor)),
     appBarTheme: AppBarTheme(
       toolbarHeight: 140,
       backgroundColor: appColors.primryLightColor,
