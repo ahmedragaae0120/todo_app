@@ -13,33 +13,46 @@ class homeSreen extends StatelessWidget {
     authprovider provider = Provider.of<authprovider>(context);
     homeProvider providerHome = Provider.of<homeProvider>(context);
     return Scaffold(
-      backgroundColor: Color(0xffdfecdb),
-      appBar: AppBar(
-        leading: IconButton(
-            onPressed: () async {
-              await provider.logout();
-              Navigator.pushReplacementNamed(context, loginScreen.route_name);
+        backgroundColor: Color(0xffdfecdb),
+        appBar: AppBar(
+          leading: IconButton(
+              onPressed: () async {
+                await provider.logout();
+                Navigator.pushReplacementNamed(context, loginScreen.route_name);
+              },
+              icon: Icon(Icons.logout,
+                  color: Theme.of(context).colorScheme.onPrimary)),
+          title: Text("To Do List"),
+        ),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.miniCenterDocked,
+        floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            child: Icon(
+              Icons.add,
+              color: Theme.of(context).colorScheme.onPrimary,
+            )),
+        bottomNavigationBar: BottomAppBar(
+          elevation: 10,
+          clipBehavior: Clip.antiAlias,
+          shape: CircularNotchedRectangle(),
+          notchMargin: 7,
+          child: BottomNavigationBar(
+            onTap: (value) {
+              providerHome.changeCurrentIndex(value);
             },
-            icon: Icon(Icons.logout,
-                color: Theme.of(context).colorScheme.onPrimary)),
-        title: Text("To Do List"),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (value) {
-          providerHome.changeCurrentIndex(value);
-        },
-        currentIndex: providerHome.currentIndex,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.format_list_bulleted_outlined),
-            label: "",
+            currentIndex: providerHome.currentIndex,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.format_list_bulleted_outlined),
+                label: "",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings_rounded),
+                label: "",
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings_rounded),
-            label: "",
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }

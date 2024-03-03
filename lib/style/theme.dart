@@ -16,6 +16,10 @@ class appTheme {
         unselectedIconTheme: IconThemeData(size: 30),
         selectedIconTheme:
             IconThemeData(size: 30, color: appColors.primryLightColor)),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: appColors.primryLightColor,
+        shape: CircleBorder(),
+        extendedPadding: EdgeInsets.all(30)),
     appBarTheme: AppBarTheme(
       toolbarHeight: 140,
       backgroundColor: appColors.primryLightColor,
@@ -26,6 +30,7 @@ class appTheme {
       ),
       foregroundColor: appColors.onPrimryLightColor,
     ),
+    useMaterial3: false,
   );
   static ThemeData darkTheme = ThemeData();
 }
