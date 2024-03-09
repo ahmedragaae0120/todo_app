@@ -3,10 +3,13 @@ import 'package:todo_app/style/app_colors.dart';
 
 class appTheme {
   static ThemeData lightTheme = ThemeData(
+    scaffoldBackgroundColor: appColors.backgroundColor,
     colorScheme: ColorScheme.fromSeed(
       seedColor: appColors.primryLightColor,
       primary: appColors.primryLightColor,
       onPrimary: appColors.onPrimryLightColor,
+      secondary: appColors.secoundLightColor,
+      onSecondary: appColors.onSecoundLightColor,
     ),
     navigationBarTheme: NavigationBarThemeData(),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(

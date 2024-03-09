@@ -5,4 +5,5 @@ class appColors {
   static Color onPrimryLightColor = Colors.white;
   static Color secoundLightColor = Colors.white;
   static Color onSecoundLightColor = Colors.black;
+  static const Color backgroundColor = Color(0xffDFECDB);
 }
