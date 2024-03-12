@@ -1,21 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/layout/home/provider/home_provider.dart';
 import 'package:todo_app/shared/reusable_commponets/custom_text_filed.dart';
 
-class addTaskSheet extends StatelessWidget {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  GlobalKey<FormState> formkey = GlobalKey();
-  addTaskSheet({super.key});
+class addTaskSheet extends StatefulWidget {
+  TextEditingController titleController;
+
+  TextEditingController descriptionController;
+
+  GlobalKey<FormState> formkey;
+  addTaskSheet(
+      {super.key,
+      required this.descriptionController,
+      required this.titleController,
+      required this.formkey});
 
   @override
+  State<addTaskSheet> createState() => _addTaskSheetState();
+}
+
+class _addTaskSheetState extends State<addTaskSheet> {
+  @override
   Widget build(BuildContext context) {
+    homeProvider providerhome = Provider.of<homeProvider>(context);
+    cheekTextfiledIsEmpty(context);
     return SingleChildScrollView(
       child: Material(
         color: Colors.transparent,
         child: Container(
           color: Theme.of(context).colorScheme.onPrimary,
           child: Form(
-            key: formkey,
+            key: widget.formkey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -31,7 +46,7 @@ class addTaskSheet extends StatelessWidget {
                 customTextfiled(
                   lable: "Enter task title",
                   keyboard: TextInputType.text,
-                  controller: titleController,
+                  controller: widget.titleController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return " Title can't be empty";
@@ -43,7 +58,7 @@ class addTaskSheet extends StatelessWidget {
                 customTextfiled(
                   lable: "Enter task description",
                   keyboard: TextInputType.multiline,
-                  controller: descriptionController,
+                  controller: widget.descriptionController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return " Description can't be empty";
@@ -53,13 +68,20 @@ class addTaskSheet extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 InkWell(
-                  onTap: () {
-                    showDatePicker(
-                        context: context,
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime.now().add(Duration(days: 365)));
+                  onTap: () async {
+                    DateTime? selectedDate = await showDatePicker(
+                      context: context,
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime.now().add(Duration(days: 365)),
+                      initialDate: DateTime.now(),
+                    );
+                    providerhome.changeSelectedDate(selectedDate);
+                    setState(() {});
                   },
-                  child: Text("select date"),
+                  child: providerhome.SelectedDate == null
+                      ? Text("select date")
+                      : Text(
+                          "${providerhome.SelectedDate?.day} / ${providerhome.SelectedDate?.month} / ${providerhome.SelectedDate?.year} "),
                 ),
                 SizedBox(height: 30),
               ],
@@ -68,5 +90,13 @@ class addTaskSheet extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool cheekTextfiledIsEmpty(BuildContext context) {
+    homeProvider provider = Provider.of<homeProvider>(context, listen: false);
+    return provider.cheekTextfiledIsEmpty(
+        titleController: widget.titleController,
+        descriptionController: widget.descriptionController,
+        context: context);
   }
 }

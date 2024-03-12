@@ -5,7 +5,11 @@ import 'package:todo_app/layout/home/taps/list_tab.dart';
 import 'package:todo_app/layout/home/taps/settings_tab.dart';
 import 'package:todo_app/layout/home/widgets/addTaskSheet.dart';
 import 'package:todo_app/layout/login/login_screen.dart';
+import 'package:todo_app/model/task_model.dart';
+import 'package:todo_app/model/user_model.dart';
+import 'package:todo_app/shared/dialog_utlis.dart';
 import 'package:todo_app/shared/providers/auth_provider.dart';
+import 'package:todo_app/shared/remote/firestore/firestore_helper.dart';
 
 class homeSreen extends StatefulWidget {
   static const String route_name = "homeSreen";
@@ -18,6 +22,11 @@ class homeSreen extends StatefulWidget {
 class _homeSreenState extends State<homeSreen> {
   List<Widget> tabs = [listTab(), settingsTab()];
   GlobalKey<ScaffoldState> scafoldKey = GlobalKey();
+  TextEditingController titleController = TextEditingController();
+
+  TextEditingController descriptionController = TextEditingController();
+
+  GlobalKey<FormState> formkey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +52,26 @@ class _homeSreenState extends State<homeSreen> {
           : FloatingActionButton(
               onPressed: () {
                 showAddTaskBottomSheet();
+                if ((formkey.currentState?.validate() ?? false) &&
+                    providerHome.SelectedDate != null) {
+                  firestoreHelper.AddNewTask(
+                      task: task(
+                        title: titleController.text,
+                        descripion: descriptionController.text,
+                        date: providerHome.SelectedDate!.millisecondsSinceEpoch,
+                      ),
+                      userid: provider.firebaseAuthUser!.uid);
+                  dialogUtils.showMessage(
+                    context: context,
+                    message: "task added Successfuly",
+                    positiveText: "ok",
+                    positiveButton: () {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    },
+                  );
+                }
+                // providerHome.isTextfiledIsEmpty ? print("pop") : print("add");
               },
               shape: StadiumBorder(
                   side: BorderSide(
@@ -83,7 +112,11 @@ class _homeSreenState extends State<homeSreen> {
 
   void showAddTaskBottomSheet() {
     scafoldKey.currentState?.showBottomSheet(
-      (context) => addTaskSheet(),
+      (context) => addTaskSheet(
+        descriptionController: descriptionController,
+        titleController: titleController,
+        formkey: formkey,
+      ),
     );
   }
 }
