@@ -49,12 +49,12 @@ class firestoreHelper {
     await taskDocument.set(task);
   }
 
-  static Future<List<task>> getAllTasks(String userid) async {
-    var taskQuery = await getTaskCollecions(userid).get();
-    List<task> tasksList =
-        taskQuery.docs.map((snapshot) => snapshot.data()).toList();
-    return tasksList;
-  }
+  // static Future<List<task>> getAllTasks(String userid) async {
+  //   var taskQuery = await getTaskCollecions(userid).get();
+  //   List<task> tasksList =
+  //       taskQuery.docs.map((snapshot) => snapshot.data()).toList();
+  //   return tasksList;
+  // }
 
   static Stream<List<task>> ListenToTasks(
       {required String userid, required int date}) async* {

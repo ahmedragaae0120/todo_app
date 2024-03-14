@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,10 +10,11 @@ import 'package:todo_app/shared/reusable_commponets/custom_text_filed.dart';
 
 class editTasksheet extends StatefulWidget {
   static const String route_name = "editTasksheet";
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descreptionController = TextEditingController();
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
-  editTasksheet({
-    super.key,
-  });
+  editTasksheet({super.key});
 
   @override
   State<editTasksheet> createState() => _addTaskSheetState();
@@ -24,10 +25,7 @@ class _addTaskSheetState extends State<editTasksheet> {
   Widget build(BuildContext context) {
     homeProvider providerhome = Provider.of<homeProvider>(context);
     authprovider provider = Provider.of<authprovider>(context);
-    TextEditingController titleController = TextEditingController();
-    TextEditingController descreptionController = TextEditingController();
-    GlobalKey<FormState> formkey = GlobalKey<FormState>();
-    task args = ModalRoute.of(context)!.settings.arguments as task;
+    final task Task = ModalRoute.of(context)?.settings.arguments as task;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -42,7 +40,7 @@ class _addTaskSheetState extends State<editTasksheet> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Container(
             child: Form(
-              key: formkey,
+              key: widget.formkey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +61,7 @@ class _addTaskSheetState extends State<editTasksheet> {
                   customTextfiled(
                     lable: "This is title",
                     keyboard: TextInputType.text,
-                    controller: titleController,
+                    controller: widget.titleController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return " Title can't be empty";
@@ -75,7 +73,7 @@ class _addTaskSheetState extends State<editTasksheet> {
                   customTextfiled(
                     lable: "This is description",
                     keyboard: TextInputType.multiline,
-                    controller: descreptionController,
+                    controller: widget.descreptionController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return " Description can't be empty";
@@ -106,20 +104,23 @@ class _addTaskSheetState extends State<editTasksheet> {
                   Center(
                       child: ElevatedButton(
                           onPressed: () async {
-                            if (formkey.currentState!.validate() ?? false) {
+                            if (widget.formkey.currentState!.validate()) {
                               await firestoreHelper.editTask(
                                   userid: provider.firebaseAuthUser!.uid,
-                                  taskID: args.id!,
+                                  taskID: Task.id ?? "",
                                   task: task(
-                                    title: titleController.text,
-                                    descripion: descreptionController.text,
+                                    title: widget.titleController.text,
+                                    descripion:
+                                        widget.descreptionController.text,
                                     date: DateTime(
                                       providerhome.SelectedDate!.year,
                                       providerhome.SelectedDate!.month,
                                       providerhome.SelectedDate!.day,
                                     ).millisecondsSinceEpoch,
+                                    id: Task.id ?? "",
                                   ));
                               Navigator.pop(context);
+                              log("id task after edit ${Task.id.toString()}");
                             }
                           },
                           style: ElevatedButton.styleFrom(
