@@ -1,10 +1,10 @@
-
 class userModel {
   String? fullName;
   String? email;
   String? id;
+
   userModel({required this.fullName, required this.email, required this.id});
-  userModel.fromFirestore(Map<String,dynamic> data) {
+  userModel.fromFirestore(Map<String, dynamic> data) {
     id = data["id"];
     fullName = data["fullname"];
     email = data["email"];

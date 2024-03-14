@@ -48,4 +48,39 @@ class firestoreHelper {
     task.id = taskDocument.id;
     await taskDocument.set(task);
   }
+
+  // static Future<List<task>> getAllTasks(String userid) async {
+  //   var taskQuery = await getTaskCollecions(userid).get();
+  //   List<task> tasksList =
+  //       taskQuery.docs.map((snapshot) => snapshot.data()).toList();
+  //   return tasksList;
+  // }
+
+  static Stream<List<task>> ListenToTasks(
+      {required String userid, required int date}) async* {
+    Stream<QuerySnapshot<task>> taskQueryStrem =
+        getTaskCollecions(userid).where("date", isEqualTo: date).snapshots();
+    Stream<List<task>> tasksStream = taskQueryStrem.map((querySnapshot) =>
+        querySnapshot.docs.map((Document) => Document.data()).toList());
+    yield* tasksStream;
+  }
+
+  static Future<void> deleteTask(
+      {required String userid, required String taskID}) async {
+    await getTaskCollecions(userid).doc(taskID).delete();
+  }
+
+  static Future<void> editTask(
+      {required String userid,
+      required String taskID,
+      required task task}) async {
+    await getTaskCollecions(userid).doc(taskID).update(task.toFirestore());
+  }
+
+  static Future<void> getIsdone(
+      {required String userid,
+      required String taskID,
+      required bool newValue}) async {
+    await getTaskCollecions(userid).doc(taskID).update({"isDone": newValue});
+  }
 }

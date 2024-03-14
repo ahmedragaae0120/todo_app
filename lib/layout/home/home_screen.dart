@@ -50,6 +50,7 @@ class _homeSreenState extends State<homeSreen> {
       floatingActionButton: keyboardIsOpened
           ? null
           : FloatingActionButton(
+              heroTag: "btn1",
               onPressed: () {
                 showAddTaskBottomSheet();
                 if ((formkey.currentState?.validate() ?? false) &&

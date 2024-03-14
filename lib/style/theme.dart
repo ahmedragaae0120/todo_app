@@ -33,6 +33,8 @@ class appTheme {
       ),
       foregroundColor: appColors.onPrimryLightColor,
     ),
+    textTheme: TextTheme(
+        bodyLarge: appColors.titleTask, bodyMedium: appColors.DoneTask),
     useMaterial3: false,
   );
   static ThemeData darkTheme = ThemeData();

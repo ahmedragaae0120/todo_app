@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/firebase_options.dart';
 import 'package:todo_app/layout/home/home_screen.dart';
 import 'package:todo_app/layout/home/provider/home_provider.dart';
+import 'package:todo_app/layout/home/widgets/editTasksheet.dart';
 import 'package:todo_app/layout/login/login_screen.dart';
 import 'package:todo_app/layout/register/register_screen.dart';
 import 'package:todo_app/layout/splach/splach_screen.dart';
@@ -39,6 +40,10 @@ class todoApp extends StatelessWidget {
         homeSreen.route_name: (context) => ChangeNotifierProvider(
               create: (context) => homeProvider(),
               child: homeSreen(),
+            ),
+        editTasksheet.route_name: (context) => ChangeNotifierProvider(
+              child: editTasksheet(),
+              create: (context) => homeProvider(),
             ),
         splachScreen.route_name: (context) => splachScreen(),
       },
