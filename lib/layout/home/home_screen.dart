@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/layout/home/provider/home_provider.dart';
@@ -5,8 +7,9 @@ import 'package:todo_app/layout/home/taps/list_tab.dart';
 import 'package:todo_app/layout/home/taps/settings_tab.dart';
 import 'package:todo_app/layout/home/widgets/addTaskSheet.dart';
 import 'package:todo_app/layout/login/login_screen.dart';
+import 'package:todo_app/model/settings_model.dart';
 import 'package:todo_app/model/task_model.dart';
-import 'package:todo_app/model/user_model.dart';
+
 import 'package:todo_app/shared/dialog_utlis.dart';
 import 'package:todo_app/shared/providers/auth_provider.dart';
 import 'package:todo_app/shared/remote/firestore/firestore_helper.dart';
@@ -33,18 +36,10 @@ class _homeSreenState extends State<homeSreen> {
     authprovider provider = Provider.of<authprovider>(context);
     homeProvider providerHome = Provider.of<homeProvider>(context);
     bool keyboardIsOpened = MediaQuery.of(context).viewInsets.bottom != 0;
+    cheekIsDocSettings();
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        leading: IconButton(
-            onPressed: () async {
-              await provider.logout();
-              Navigator.pushReplacementNamed(context, loginScreen.route_name);
-            },
-            icon: Icon(Icons.logout,
-                color: Theme.of(context).colorScheme.onPrimary)),
-        title: Text("To Do List"),
-      ),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterDocked,
       floatingActionButton: keyboardIsOpened
@@ -109,6 +104,17 @@ class _homeSreenState extends State<homeSreen> {
         body: tabs[providerHome.currentIndex],
       ),
     );
+  }
+
+  void cheekIsDocSettings() async {
+    authprovider provider = Provider.of<authprovider>(context, listen: false);
+    var cheekIsDocSettings =
+        await firestoreHelper.getAllSettings(provider.firebaseAuthUser!.uid);
+    if (cheekIsDocSettings < 1) {
+      firestoreHelper.AddSettingsUser(
+          userid: provider.firebaseAuthUser!.uid,
+          SettingsUser: settingsModel());
+    }
   }
 
   void showAddTaskBottomSheet() {

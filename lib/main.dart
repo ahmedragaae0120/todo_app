@@ -17,8 +17,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => authprovider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => authprovider()),
+        ChangeNotifierProvider(create: (context) => homeProvider()),
+      ],
       child: const todoApp(),
     ),
   );
@@ -26,14 +29,16 @@ void main() async {
 
 class todoApp extends StatelessWidget {
   const todoApp({super.key});
-
   @override
   Widget build(BuildContext context) {
+    homeProvider providerHome = Provider.of<homeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: appTheme.lightTheme,
       darkTheme: appTheme.darkTheme,
-      themeMode: ThemeMode.light,
+      themeMode: providerHome.dropdownMode == "dark"
+          ? ThemeMode.dark
+          : ThemeMode.light,
       routes: {
         loginScreen.route_name: (context) => loginScreen(),
         registerScreen.route_name: (context) => registerScreen(),

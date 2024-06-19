@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:todo_app/model/settings_model.dart';
 import 'package:todo_app/model/task_model.dart';
 import 'package:todo_app/model/user_model.dart';
 
@@ -82,5 +83,41 @@ class firestoreHelper {
       required String taskID,
       required bool newValue}) async {
     await getTaskCollecions(userid).doc(taskID).update({"isDone": newValue});
+  }
+
+  static CollectionReference<settingsModel> getSettingsCollecions(
+      String userid) {
+    var SettingsCollection = getUsersCollecions()
+        .doc(userid)
+        .collection("Settings")
+        .withConverter(
+          fromFirestore: (snapshot, options) =>
+              settingsModel.fromFirestore(snapshot.data() ?? {}),
+          toFirestore: (settingsModel, options) => settingsModel.toFirestore(),
+        );
+    return SettingsCollection;
+  }
+
+  static Future<void> AddSettingsUser(
+      {required settingsModel SettingsUser, required String userid}) async {
+    var settingsDocument = getSettingsCollecions(userid).doc();
+    settingsModel.settingsID = settingsDocument.id;
+    await settingsDocument.set(SettingsUser);
+  }
+
+  static Future<void> editSettings(
+      {required String userid,
+      required String settingsId,
+      required settingsModel settingsUser}) async {
+    await getSettingsCollecions(userid)
+        .doc(settingsId)
+        .update(settingsUser.toFirestore());
+  }
+
+  static Future<int> getAllSettings(String userid) async {
+    var settingsQuery = await getSettingsCollecions(userid).get();
+    List<settingsModel> settingsList =
+        settingsQuery.docs.map((snapshot) => snapshot.data()).toList();
+    return settingsList.length;
   }
 }

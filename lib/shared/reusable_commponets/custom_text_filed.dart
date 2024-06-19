@@ -21,7 +21,13 @@ class customTextfiled extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      decoration: InputDecoration(labelText: lable, suffixIcon: suffixIcon),
+      decoration: InputDecoration(
+          labelText: lable,
+          suffixIcon: suffixIcon,
+          labelStyle: Theme.of(context)
+              .textTheme
+              .bodySmall!
+              .copyWith(fontSize: 16, color: Colors.grey)),
       keyboardType: keyboard,
       cursorColor: Colors.black,
       controller: controller,

@@ -26,10 +26,12 @@ class _addTaskSheetState extends State<editTasksheet> {
     homeProvider providerhome = Provider.of<homeProvider>(context);
     authprovider provider = Provider.of<authprovider>(context);
     final task Task = ModalRoute.of(context)?.settings.arguments as task;
+    var height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        toolbarHeight: height * 0.2,
         title: Text("To Do List"),
       ),
       body: Center(
@@ -52,7 +54,7 @@ class _addTaskSheetState extends State<editTasksheet> {
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         color: Theme.of(context).colorScheme.onSecondary,
-                        fontSize: 18,
+                        fontSize: 22,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -94,10 +96,25 @@ class _addTaskSheetState extends State<editTasksheet> {
                         providerhome.changeSelectedDate(selectedDate);
                         setState(() {});
                       },
-                      child: providerhome.SelectedDate == null
-                          ? Text("select date")
-                          : Text(
-                              "${providerhome.SelectedDate?.day} / ${providerhome.SelectedDate?.month} / ${providerhome.SelectedDate?.year} "),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text("select date:",
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                  fontSize: 20)),
+                          providerhome.SelectedDate == null
+                              ? Text(
+                                  " __  /  __  /  __  ",
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                )
+                              : Text(
+                                  "${providerhome.SelectedDate?.day} / ${providerhome.SelectedDate?.month} / ${providerhome.SelectedDate?.year} ",
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(height: 30),

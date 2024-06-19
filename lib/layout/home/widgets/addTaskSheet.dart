@@ -28,7 +28,7 @@ class _addTaskSheetState extends State<addTaskSheet> {
       child: Material(
         color: Colors.transparent,
         child: Container(
-          color: Theme.of(context).colorScheme.onPrimary,
+          color: Theme.of(context).colorScheme.secondary,
           child: Form(
             key: widget.formkey,
             child: Column(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/model/settings_model.dart';
 import 'package:todo_app/model/task_model.dart';
 
 class homeProvider extends ChangeNotifier {
@@ -40,5 +41,19 @@ class homeProvider extends ChangeNotifier {
     Task?.isDone = true;
     notifyListeners();
     return true;
+  }
+
+  String dropdownLanguage = "en";
+  String dropdownMode = "Light";
+  changedropdownLanguage(String newLanguage) {
+    if (dropdownLanguage == newLanguage) return;
+    dropdownLanguage = newLanguage;
+    notifyListeners();
+  }
+
+  changedropdownMode(String newMode) {
+    if (dropdownMode == newMode) return;
+    dropdownMode = newMode;
+    notifyListeners();
   }
 }

@@ -52,7 +52,7 @@ class taskWidget extends StatelessWidget {
         padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Theme.of(context).colorScheme.onPrimary,
+          color: Theme.of(context).colorScheme.secondary,
         ),
         child: Row(
           children: [
@@ -83,6 +83,7 @@ class taskWidget extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.access_time,
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),
                       Text(
                         "${DateFormat.yMd().format(taskDate)}",
@@ -105,7 +106,7 @@ class taskWidget extends StatelessWidget {
                     },
                     child: Text(
                       "Done !",
-                      style: TextStyle(color: appColors.Donetask),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   )
                 : ElevatedButton(
