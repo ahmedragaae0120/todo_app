@@ -22,7 +22,7 @@ class _settingsTabState extends State<settingsTab> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: height * 0.2,
-        title: Text("Settings", style: TextStyle(fontSize: 25)),
+        title: const Text("Settings", style: TextStyle(fontSize: 25)),
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
@@ -32,7 +32,7 @@ class _settingsTabState extends State<settingsTab> {
         ),
         SizedBox(height: height * 0.02),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 40),
+          margin: const EdgeInsets.symmetric(horizontal: 40),
           decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondary,
               border: Border.all(color: Theme.of(context).colorScheme.primary)),
@@ -41,16 +41,16 @@ class _settingsTabState extends State<settingsTab> {
             isExpanded: true,
             style: TextStyle(
                 color: Theme.of(context).colorScheme.primary, fontSize: 20),
-            padding: EdgeInsets.symmetric(horizontal: 50),
+            padding: const EdgeInsets.symmetric(horizontal: 50),
             items: [
               DropdownMenuItem(
                 value: "en",
-                child: Text("English"),
+                child: const Text("English"),
                 onTap: () {},
               ),
               DropdownMenuItem(
                 value: "ar",
-                child: Text("Arabic"),
+                child: const Text("Arabic"),
                 onTap: () {},
               ),
             ],
@@ -79,7 +79,7 @@ class _settingsTabState extends State<settingsTab> {
         ),
         SizedBox(height: height * 0.02),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 40),
+          margin: const EdgeInsets.symmetric(horizontal: 40),
           decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondary,
               border: Border.all(color: Theme.of(context).colorScheme.primary)),
@@ -88,16 +88,16 @@ class _settingsTabState extends State<settingsTab> {
             isExpanded: true,
             style: TextStyle(
                 color: Theme.of(context).colorScheme.primary, fontSize: 20),
-            padding: EdgeInsets.symmetric(horizontal: 50),
+            padding: const EdgeInsets.symmetric(horizontal: 50),
             items: [
               DropdownMenuItem(
                 value: "Light",
-                child: Text("Light"),
+                child: const Text("Light"),
                 onTap: () {},
               ),
               DropdownMenuItem(
                 value: "dark",
-                child: Text("dark"),
+                child: const Text("dark"),
                 onTap: () {},
               ),
             ],

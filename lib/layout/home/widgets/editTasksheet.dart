@@ -32,12 +32,12 @@ class _addTaskSheetState extends State<editTasksheet> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         toolbarHeight: height * 0.2,
-        title: Text("To Do List"),
+        title: const Text("To Do List"),
       ),
       body: Center(
         child: Card(
           elevation: 10,
-          margin: EdgeInsets.all(30),
+          margin: const EdgeInsets.all(30),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Container(
@@ -59,7 +59,7 @@ class _addTaskSheetState extends State<editTasksheet> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   customTextfiled(
                     lable: "This is title",
                     keyboard: TextInputType.text,
@@ -70,8 +70,10 @@ class _addTaskSheetState extends State<editTasksheet> {
                       }
                       return null;
                     },
+                    textStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: Theme.of(context).colorScheme.onSecondary),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   customTextfiled(
                     lable: "This is description",
                     keyboard: TextInputType.multiline,
@@ -82,15 +84,18 @@ class _addTaskSheetState extends State<editTasksheet> {
                       }
                       return null;
                     },
+                    textStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: Theme.of(context).colorScheme.onSecondary),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Center(
                     child: InkWell(
                       onTap: () async {
                         DateTime? selectedDate = await showDatePicker(
                           context: context,
                           firstDate: DateTime.now(),
-                          lastDate: DateTime.now().add(Duration(days: 365)),
+                          lastDate:
+                              DateTime.now().add(const Duration(days: 365)),
                           initialDate: DateTime.now(),
                         );
                         providerhome.changeSelectedDate(selectedDate);
@@ -117,25 +122,27 @@ class _addTaskSheetState extends State<editTasksheet> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Center(
                       child: ElevatedButton(
                           onPressed: () async {
                             if (widget.formkey.currentState!.validate()) {
-                              await firestoreHelper.editTask(
-                                  userid: provider.firebaseAuthUser!.uid,
-                                  taskID: Task.id ?? "",
-                                  task: task(
-                                    title: widget.titleController.text,
-                                    descripion:
-                                        widget.descreptionController.text,
-                                    date: DateTime(
-                                      providerhome.SelectedDate!.year,
-                                      providerhome.SelectedDate!.month,
-                                      providerhome.SelectedDate!.day,
-                                    ).millisecondsSinceEpoch,
-                                    id: Task.id ?? "",
-                                  ));
+                              // await firestoreHelper.editTask(
+                              //     userid: provider.firebaseAuthUser!.uid,
+                              //     taskID: Task.id ?? "",
+                              //     task: task(
+                              //       title: widget.titleController.text,
+                              //       descripion:
+                              //           widget.descreptionController.text,
+                              //       date: DateTime(
+                              //         providerhome.SelectedDate!.year,
+                              //         providerhome.SelectedDate!.month,
+                              //         providerhome.SelectedDate!.day,
+                              //       ).millisecondsSinceEpoch,
+                              //       time: providerhome.selectedTime
+                              //           .format(context),
+                              //       id: Task.id ?? "",
+                              //     ));
                               Navigator.pop(context);
                               log("id task after edit ${Task.id.toString()}");
                             }
@@ -143,7 +150,7 @@ class _addTaskSheetState extends State<editTasksheet> {
                           style: ElevatedButton.styleFrom(
                               backgroundColor:
                                   Theme.of(context).colorScheme.primary),
-                          child: Text("Save Changes")))
+                          child: const Text("Save Changes")))
                 ],
               ),
             ),

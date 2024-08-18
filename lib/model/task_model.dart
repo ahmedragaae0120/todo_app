@@ -4,18 +4,25 @@ class task {
   String? descripion;
   int? date;
   bool? isDone;
-  task(
-      {required this.title,
-      required this.descripion,
-      required this.date,
-      this.id,
-      this.isDone = false});
+  int? priority;
+  String? time;
+  task({
+     this.title,
+     this.descripion,
+     this.date,
+    this.id,
+    this.isDone = false,
+    this.priority = 10,
+     this.time,
+  });
   task.fromFirestore(Map<String, dynamic> data) {
     id = data["id"];
     title = data["title"];
     descripion = data["descripion"];
     date = data["date"];
     isDone = data["isDone"];
+    priority = data["priority"];
+    time = data["time"];
   }
 
   Map<String, dynamic> toFirestore() {
@@ -25,6 +32,8 @@ class task {
       "descripion": descripion,
       "date": date,
       "isDone": isDone,
+      "priority": priority,
+      "time": time,
     };
   }
 }

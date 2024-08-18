@@ -38,10 +38,15 @@ dependencies:
   firebase_core: ^2.25.4
   cloud_firestore: ^4.15.6
   firebase_auth: ^4.17.6
-  provider: ^6.1.2
   easy_date_timeline: ^1.0.5
   intl: ^0.19.0
   flutter_slidable: ^3.0.1
+  flutter_svg: ^2.0.10+1
+  provider: ^6.1.2
+  flutter_screenutil: ^5.9.3
+  animated_introduction: ^1.0.4
+  ndialog: ^4.3.1
+  table_calendar: ^3.1.2
 
 dev_dependencies:
   flutter_test:

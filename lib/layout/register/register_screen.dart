@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/layout/home/home_screen.dart';
+import 'package:todo_app/layout/login/login_screen.dart';
 import 'package:todo_app/model/user_model.dart';
 import 'package:todo_app/shared/FirebaseAuthErorrCodes.dart';
 import 'package:todo_app/shared/constants.dart';
@@ -12,7 +14,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class registerScreen extends StatefulWidget {
   static const String route_name = "registerScreen";
-  registerScreen({super.key});
+  const registerScreen({super.key});
 
   @override
   State<registerScreen> createState() => _loginScreenState();
@@ -29,134 +31,186 @@ class _loginScreenState extends State<registerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage("assets/images/SIGNIN1.jpg"),
-          fit: BoxFit.fill,
-        )),
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            title: const Text(
-              "register",
-            ),
-            backgroundColor: Colors.transparent,
-            centerTitle: true,
-          ),
-          backgroundColor: Colors.transparent,
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Form(
-              key: formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Welcome back!",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.start,
-                  ),
-                  customTextfiled(
-                    lable: 'full name',
-                    keyboard: TextInputType.emailAddress,
-                    controller: fullNameController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "this field can't be empty";
-                      }
-                      if (value.length > 30) {
-                        return "The name exceeded the allowed limit";
-                      }
-                      return null;
-                    },
-                  ),
-                  customTextfiled(
-                    lable: 'Email',
-                    keyboard: TextInputType.emailAddress,
-                    controller: emailController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "this field can't be empty";
-                      }
-                      if (!RegExp(constants.emailregex).hasMatch(value)) {
-                        return "Enter valid Email";
-                      }
-                      return null;
-                    },
-                  ),
-                  customTextfiled(
-                    lable: 'password',
-                    keyboard: TextInputType.visiblePassword,
-                    controller: passwordController,
-                    ObscureText: isObscure,
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          isObscure = !isObscure;
-                        });
-                      },
-                      icon: Icon(
-                          isObscure ? Icons.visibility : Icons.visibility_off,
-                          color: Theme.of(context).colorScheme.primary),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "this field can't be empty";
-                      }
-                      if (value.length < 8) {
-                        return "password should is 8 char";
-                      }
-                      return null;
-                    },
-                  ),
-                  customTextfiled(
-                    lable: 'Confirm password',
-                    keyboard: TextInputType.visiblePassword,
-                    controller: confirmPasswordController,
-                    ObscureText: isObscure,
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          isObscure = !isObscure;
-                        });
-                      },
-                      icon: Icon(
-                          isObscure ? Icons.visibility : Icons.visibility_off,
-                          color: Theme.of(context).colorScheme.primary),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "this field can't be empty";
-                      }
-                      if (value.length < 8) {
-                        return "password should is 8 char";
-                      }
-                      if (value != passwordController.text) {
-                        return "confirm password should be equal password  ";
-                      } // to do
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: 15),
-                  ElevatedButton(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Form(
+          key: formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(height: 100.h),
+                const Text(
+                  "Register",
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                  textAlign: TextAlign.start,
+                ),
+                SizedBox(height: 25.h),
+                Text(
+                  "Full Name",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onPrimary),
+                  textAlign: TextAlign.start,
+                ),
+                customTextfiled(
+                  hintText: 'Enter your Full name',
+                  keyboard: TextInputType.emailAddress,
+                  controller: fullNameController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "this field can't be empty";
+                    }
+                    if (value.length > 30) {
+                      return "The name exceeded the allowed limit";
+                    }
+                    return null;
+                  },
+                  textStyle: Theme.of(context).textTheme.bodySmall,
+                ),
+                SizedBox(height: 25.h),
+                Text(
+                  "Email",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onPrimary),
+                  textAlign: TextAlign.start,
+                ),
+                customTextfiled(
+                  hintText: "Enter your Email",
+                  keyboard: TextInputType.emailAddress,
+                  controller: emailController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "this field can't be empty";
+                    }
+                    if (!RegExp(constants.emailregex).hasMatch(value)) {
+                      return "Enter valid Email";
+                    }
+                    return null;
+                  },
+                  textStyle: Theme.of(context).textTheme.bodySmall,
+                ),
+                SizedBox(height: 25.h),
+                Text(
+                  "Password",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onPrimary),
+                  textAlign: TextAlign.start,
+                ),
+                customTextfiled(
+                  hintText: "Enter your Password",
+                  keyboard: TextInputType.visiblePassword,
+                  controller: passwordController,
+                  ObscureText: isObscure,
+                  suffixIcon: IconButton(
                     onPressed: () {
-                      createNewUser();
+                      setState(() {
+                        isObscure = !isObscure;
+                      });
                     },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).colorScheme.primary),
-                    child: Text("Register",
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          fontSize: 20,
-                        )),
-                  )
-                ],
-              ),
+                    icon: Icon(
+                        isObscure ? Icons.visibility : Icons.visibility_off,
+                        color: Theme.of(context).colorScheme.primary),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "this field can't be empty";
+                    }
+                    if (value.length < 8) {
+                      return "password should is 8 char";
+                    }
+                    return null;
+                  },
+                  textStyle: Theme.of(context).textTheme.bodySmall,
+                ),
+                SizedBox(height: 25.h),
+                Text(
+                  "Confirm Password",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onPrimary),
+                  textAlign: TextAlign.start,
+                ),
+                customTextfiled(
+                  hintText: "Enter your Confirm Password",
+                  keyboard: TextInputType.visiblePassword,
+                  controller: confirmPasswordController,
+                  ObscureText: isObscure,
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isObscure = !isObscure;
+                      });
+                    },
+                    icon: Icon(
+                        isObscure ? Icons.visibility : Icons.visibility_off,
+                        color: Theme.of(context).colorScheme.primary),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "this field can't be empty";
+                    }
+                    if (value.length < 8) {
+                      return "password should is 8 char";
+                    }
+                    if (value != passwordController.text) {
+                      return "confirm password should be equal password  ";
+                    } // to do
+                    return null;
+                  },
+                  textStyle: Theme.of(context).textTheme.bodySmall,
+                ),
+                SizedBox(height: 30.h),
+                ElevatedButton(
+                  onPressed: () {
+                    createNewUser();
+                  },
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: Size(300.w, 48.h),
+                      backgroundColor: Theme.of(context).colorScheme.secondary),
+                  child: Text("Register",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontSize: 20,
+                      )),
+                ),
+                SizedBox(height: 15.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Already have an account?",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    TextButton(
+                        onPressed: () =>
+                            Navigator.pushNamed(context, loginScreen.route_name),
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Theme.of(context).colorScheme.onPrimary),
+                        ))
+                  ],
+                )
+              ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   void createNewUser() async {
