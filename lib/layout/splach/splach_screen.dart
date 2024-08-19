@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/layout/home/home_screen.dart';
 import 'package:todo_app/layout/intro/intro_screen.dart';
-import 'package:todo_app/layout/login/login_screen.dart';
 import 'package:todo_app/shared/providers/auth_provider.dart';
 
 class splachScreen extends StatefulWidget {

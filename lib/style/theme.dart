@@ -72,21 +72,21 @@ class appTheme {
         shape: const CircleBorder(),
         extendedPadding: const EdgeInsets.all(30)),
     appBarTheme: AppBarTheme(
-      toolbarHeight: 50.h,
+      toolbarHeight: 50,
       backgroundColor: Colors.transparent,
       titleTextStyle: TextStyle(
         color: appColors.onSecoundDarkColor,
         fontWeight: FontWeight.bold,
-        fontSize: 20.sp,
+        fontSize: 20,
       ),
       foregroundColor: appColors.onPrimryDarkColor,
     ),
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: appColors.primryDarkColor,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(20.r),
-        topRight: Radius.circular(20.r),
+        topLeft: Radius.circular(20),
+        topRight: Radius.circular(20),
       )),
     ),
     textTheme: TextTheme(

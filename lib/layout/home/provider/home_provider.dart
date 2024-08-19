@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/model/task_model.dart';
 
@@ -8,7 +7,7 @@ class homeProvider extends ChangeNotifier {
   int currentIndex = 0;
   bool isTextfiledIsEmpty = true;
   bool showbuttoncheek = true;
-  String tabName = "Index";
+  String tabName = "Index".tr();
   changeisDone(bool newValue) {
     if (showbuttoncheek == newValue) return;
     showbuttoncheek = newValue;
@@ -98,9 +97,9 @@ class homeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  changedropdownMode(String newMode) {
+  changedropdownMode(String? newMode) {
     if (dropdownMode == newMode) return;
-    dropdownMode = newMode;
+    dropdownMode = newMode!;
     notifyListeners();
   }
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/layout/home/provider/home_provider.dart';
@@ -26,7 +27,12 @@ class _homeSreenState extends State<homeSreen> {
     const HistoryTab(),
     const settingsTab(),
   ];
-  List<String> tabsName = ["Index", "Calendar", "History", "Profile"];
+  List<String> tabsName = [
+    "Index",
+    "Calendar",
+    "History",
+    "Profile",
+  ];
 
   GlobalKey<ScaffoldState> scafoldKey = GlobalKey();
   // TextEditingController titleController = TextEditingController();
@@ -93,28 +99,28 @@ class _homeSreenState extends State<homeSreen> {
           fixedColor: Colors.white,
           onTap: (value) {
             providerHome.changeCurrentIndex(value);
-            providerHome.changeTabName(tabsName[value]);
+            providerHome.changeTabName(tabsName[value].tr());
           },
           currentIndex: providerHome.currentIndex,
           type: BottomNavigationBarType.fixed,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(
+              icon: const Icon(
                 Icons.other_houses_rounded,
               ),
-              label: "Index",
+              label: "Index".tr(),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_month_outlined),
-              label: "Calendar",
+              icon: const Icon(Icons.calendar_month_outlined),
+              label: "Calendar".tr(),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.access_time),
-              label: "Focuse",
+              icon: const Icon(Icons.access_time),
+              label: "Focuse".tr(),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline_outlined),
-              label: "Profile",
+              icon: const Icon(Icons.person_outline_outlined),
+              label: "Profile".tr(),
             ),
           ],
         ),

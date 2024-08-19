@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/layout/home/home_screen.dart';
 import 'package:todo_app/layout/register/register_screen.dart';
@@ -39,7 +38,7 @@ class _loginScreenState extends State<loginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 100.h),
+              const SizedBox(height: 100),
               const Text(
                 "Login",
                 style: TextStyle(
@@ -48,7 +47,7 @@ class _loginScreenState extends State<loginScreen> {
                     color: Colors.white),
                 textAlign: TextAlign.start,
               ),
-              SizedBox(height: 53.h),
+              const SizedBox(height: 53),
               Text(
                 "Email",
                 style: TextStyle(
@@ -69,9 +68,10 @@ class _loginScreenState extends State<loginScreen> {
                     return "Enter valid Email";
                   }
                   return null;
-                }, textStyle: Theme.of(context).textTheme.bodySmall,
+                },
+                textStyle: Theme.of(context).textTheme.bodySmall,
               ),
-              SizedBox(height: 53.h),
+              const SizedBox(height: 53),
               Text(
                 "Password",
                 style: TextStyle(
@@ -105,23 +105,24 @@ class _loginScreenState extends State<loginScreen> {
                     return "password should is 8 char";
                   }
                   return null;
-                }, textStyle:  Theme.of(context).textTheme.bodySmall,
+                },
+                textStyle: Theme.of(context).textTheme.bodySmall,
               ),
-              SizedBox(height: 30.h),
+              const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () {
                   login();
                 },
                 style: ElevatedButton.styleFrom(
-                    fixedSize: Size(300.w, 48.h),
+                    fixedSize: const Size(300, 48),
                     backgroundColor: Theme.of(context).colorScheme.secondary),
                 child: Text("Login",
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: 20.sp,
+                      fontSize: 20,
                     )),
               ),
-              SizedBox(height: 15.h),
+              const SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -135,7 +136,7 @@ class _loginScreenState extends State<loginScreen> {
                       child: Text(
                         "Register",
                         style: TextStyle(
-                            fontSize: 16.sp,
+                            fontSize: 16,
                             color: Theme.of(context).colorScheme.onPrimary),
                       ))
                 ],

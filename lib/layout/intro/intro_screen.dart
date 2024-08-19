@@ -1,9 +1,5 @@
-import 'dart:math';
-
 import 'package:animated_introduction/animated_introduction.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/layout/login/login_screen.dart';
 import 'package:todo_app/layout/register/register_screen.dart';
 
@@ -64,12 +60,12 @@ class Welcome extends StatelessWidget {
       appBar: AppBar(),
       body: Column(
         children: [
-          SizedBox(height: 70.h),
-          Text(
+          const SizedBox(height: 70),
+          const Text(
             "Welcome to UpTodo",
-            style: TextStyle(fontSize: 24.sp, color: Colors.white),
+            style: TextStyle(fontSize: 24, color: Colors.white),
           ),
-          SizedBox(height: 26.h),
+          const SizedBox(height: 26),
           Center(
             child: Text(
               '''Please login to your account or create 
@@ -84,7 +80,7 @@ class Welcome extends StatelessWidget {
               Navigator.pushNamed(context, loginScreen.route_name);
             },
             style: ElevatedButton.styleFrom(
-                fixedSize: Size(300.w, 48.h),
+                fixedSize: const Size(300, 48),
                 backgroundColor: Theme.of(context).colorScheme.secondary),
             child: Text("Login",
                 style: TextStyle(
@@ -92,13 +88,13 @@ class Welcome extends StatelessWidget {
                   fontSize: 20,
                 )),
           ),
-          SizedBox(height: 15.h),
+          const SizedBox(height: 15),
           ElevatedButton(
             onPressed: () {
               Navigator.pushNamed(context, registerScreen.route_name);
             },
             style: ElevatedButton.styleFrom(
-                fixedSize: Size(300.w, 48.h),
+                fixedSize: const Size(300, 48),
                 side:
                     BorderSide(color: Theme.of(context).colorScheme.secondary),
                 backgroundColor: Colors.transparent),

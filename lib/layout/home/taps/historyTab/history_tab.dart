@@ -12,38 +12,41 @@ class HistoryTab extends StatelessWidget {
   Widget build(BuildContext context) {
     authprovider providerAuth = Provider.of<authprovider>(context);
     return Scaffold(
-      body: StreamBuilder(
-        stream: firestoreHelper.ListenToHistoryTasks(
-            userid: providerAuth.firebaseAuthUser!.uid),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.none) {
-            const Center(child: Text("No Internet"));
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator.adaptive());
-          }
-          if (snapshot.hasError) {
-            return Center(
-              child: Column(
-                children: [
-                  Text("something went wrong ${snapshot.error}"),
-                  ElevatedButton(
-                      onPressed: () {}, child: const Text("Try agian")),
-                ],
-              ),
-            );
-          }
-          List<task> Tasks = snapshot.data ?? [];
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: StreamBuilder(
+          stream: firestoreHelper.ListenToHistoryTasks(
+              userid: providerAuth.firebaseAuthUser!.uid),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.none) {
+              const Center(child: Text("No Internet"));
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator.adaptive());
+            }
+            if (snapshot.hasError) {
+              return Center(
+                child: Column(
+                  children: [
+                    Text("something went wrong ${snapshot.error}"),
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text("Try agian")),
+                  ],
+                ),
+              );
+            }
+            List<task> Tasks = snapshot.data ?? [];
 
-          return ListView.separated(
-            itemBuilder: (context, index) => taskWidget(Task: Tasks[index]),
-            separatorBuilder: (BuildContext context, int index) =>
-                const SizedBox(
-              height: 10,
-            ),
-            itemCount: Tasks.length,
-          );
-        },
+            return ListView.separated(
+              itemBuilder: (context, index) => taskWidget(Task: Tasks[index]),
+              separatorBuilder: (BuildContext context, int index) =>
+                  const SizedBox(
+                height: 10,
+              ),
+              itemCount: Tasks.length,
+            );
+          },
+        ),
       ),
     );
   }

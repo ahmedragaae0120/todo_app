@@ -46,7 +46,7 @@ class dialogUtils {
           color: Colors.transparent,
           child: Center(
             child: Container(
-              margin: EdgeInsets.all(20),
+              margin: const EdgeInsets.all(20),
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -57,7 +57,7 @@ class dialogUtils {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(message),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

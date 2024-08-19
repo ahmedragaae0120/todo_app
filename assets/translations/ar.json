@@ -1,0 +1,22 @@
+{
+    "Index" : "الفهرس",
+    "Calendar" : "التقويم",
+    "History" : "المحفوظات",
+    "Focuse" : "المحفوظات",
+    "Profile" : "بروفايل",
+    "All":"الكل",
+    "Today":"اليوم",
+    "this week":"هذا الاسبوع",
+    "this month":"هذا الشهر",
+    "Completed":"مكتمل",
+    "Settings":"الاعدادت",
+    "Lanuage":"اللغة",
+    "Mode":"الثيم",
+    "Arabic":"العربية",
+    "Add Task":"اضافة مهمة",
+    "Enter task title": "ادخل عنوان المهمة",
+    "Title can't be empty":"لا يمكن ان يكون العنوان فارغ",
+    "Enter task description":"ادخل وصف المهمة",
+    "Description can't be empty":"لا يمكن ان يكون الوصف فارغا",
+    "logout":"تسجيل الخروج"
+}

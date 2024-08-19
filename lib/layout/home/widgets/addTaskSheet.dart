@@ -1,7 +1,7 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/layout/home/provider/home_provider.dart';
 import 'package:todo_app/layout/home/widgets/dialog.dart';
@@ -31,7 +31,7 @@ class _addTaskSheetState extends State<addTaskSheet> {
       child: Material(
         color: Colors.transparent,
         child: Container(
-          padding: REdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           height: 400,
           child: Form(
             key: formkey,
@@ -40,7 +40,7 @@ class _addTaskSheetState extends State<addTaskSheet> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Add Task",
+                  "Add Task".tr(),
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
@@ -48,14 +48,14 @@ class _addTaskSheetState extends State<addTaskSheet> {
                     fontSize: 22,
                   ),
                 ),
-                SizedBox(height: 15.h),
+                const SizedBox(height: 15),
                 customTextfiled(
-                  hintText: "Enter task title",
+                  hintText: "Enter task title".tr(),
                   keyboard: TextInputType.text,
                   controller: titleController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return " Title can't be empty";
+                      return "Title can't be empty".tr();
                     }
                     return null;
                   },
@@ -64,12 +64,12 @@ class _addTaskSheetState extends State<addTaskSheet> {
                 ),
                 const SizedBox(height: 20),
                 customTextfiled(
-                  hintText: "Enter task description",
+                  hintText: "Enter task description".tr(),
                   keyboard: TextInputType.multiline,
                   controller: descriptionController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return " Description can't be empty";
+                      return "Description can't be empty".tr();
                     }
                     return null;
                   },
@@ -199,7 +199,7 @@ class _addTaskSheetState extends State<addTaskSheet> {
       firstDate: DateTime.now(),
       lastDate: DateTime.now().add(const Duration(days: 365)),
       initialDate: DateTime.now(),
-      textDirection: TextDirection.ltr,
+      // textDirection: TextDirection.ltr,
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.dark().copyWith(

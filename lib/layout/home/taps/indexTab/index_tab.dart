@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/layout/home/provider/home_provider.dart';
@@ -13,7 +14,7 @@ class IndexTab extends StatefulWidget {
 }
 
 class _IndexTabState extends State<IndexTab> {
-  String? selectedSort = "All";
+  String? selectedSort = "All".tr();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class _IndexTabState extends State<IndexTab> {
                         width: 170,
                         child: ListTile(
                           title: Text(
-                            "Completed",
+                            "Completed".tr(),
                             style: TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.onSecondary),

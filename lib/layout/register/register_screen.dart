@@ -42,7 +42,7 @@ class _loginScreenState extends State<registerScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(height: 100.h),
+                const SizedBox(height: 100),
                 const Text(
                   "Register",
                   style: TextStyle(
@@ -51,7 +51,7 @@ class _loginScreenState extends State<registerScreen> {
                       color: Colors.white),
                   textAlign: TextAlign.start,
                 ),
-                SizedBox(height: 25.h),
+                const SizedBox(height: 25),
                 Text(
                   "Full Name",
                   style: TextStyle(
@@ -75,7 +75,7 @@ class _loginScreenState extends State<registerScreen> {
                   },
                   textStyle: Theme.of(context).textTheme.bodySmall,
                 ),
-                SizedBox(height: 25.h),
+                const SizedBox(height: 25),
                 Text(
                   "Email",
                   style: TextStyle(
@@ -99,7 +99,7 @@ class _loginScreenState extends State<registerScreen> {
                   },
                   textStyle: Theme.of(context).textTheme.bodySmall,
                 ),
-                SizedBox(height: 25.h),
+                const SizedBox(height: 25),
                 Text(
                   "Password",
                   style: TextStyle(
@@ -134,7 +134,7 @@ class _loginScreenState extends State<registerScreen> {
                   },
                   textStyle: Theme.of(context).textTheme.bodySmall,
                 ),
-                SizedBox(height: 25.h),
+                const SizedBox(height: 25),
                 Text(
                   "Confirm Password",
                   style: TextStyle(
@@ -172,13 +172,13 @@ class _loginScreenState extends State<registerScreen> {
                   },
                   textStyle: Theme.of(context).textTheme.bodySmall,
                 ),
-                SizedBox(height: 30.h),
+                const SizedBox(height: 30),
                 ElevatedButton(
                   onPressed: () {
                     createNewUser();
                   },
                   style: ElevatedButton.styleFrom(
-                      fixedSize: Size(300.w, 48.h),
+                      fixedSize: const Size(300, 48),
                       backgroundColor: Theme.of(context).colorScheme.secondary),
                   child: Text("Register",
                       style: TextStyle(
@@ -186,7 +186,7 @@ class _loginScreenState extends State<registerScreen> {
                         fontSize: 20,
                       )),
                 ),
-                SizedBox(height: 15.h),
+                const SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -195,12 +195,12 @@ class _loginScreenState extends State<registerScreen> {
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     TextButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, loginScreen.route_name),
+                        onPressed: () => Navigator.pushNamed(
+                            context, loginScreen.route_name),
                         child: Text(
                           "Login",
                           style: TextStyle(
-                              fontSize: 16.sp,
+                              fontSize: 16,
                               color: Theme.of(context).colorScheme.onPrimary),
                         ))
                   ],

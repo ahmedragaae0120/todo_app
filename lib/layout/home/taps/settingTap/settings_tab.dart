@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/layout/home/provider/home_provider.dart';
+import 'package:todo_app/layout/login/login_screen.dart';
 import 'package:todo_app/model/settings_model.dart';
 import 'package:todo_app/shared/providers/auth_provider.dart';
 import 'package:todo_app/shared/remote/firestore/firestore_helper.dart';
@@ -16,17 +18,18 @@ class _settingsTabState extends State<settingsTab> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     authprovider provider = Provider.of<authprovider>(context);
     homeProvider providerhome = Provider.of<homeProvider>(context);
     settingsModel settings = settingsModel();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: height * 0.2,
-        title: const Text("Settings", style: TextStyle(fontSize: 25)),
+        title: Text("Settings".tr(), style: const TextStyle(fontSize: 25)),
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
-          "Language",
+          "Language".tr(),
           style: TextStyle(
               color: Theme.of(context).colorScheme.onSecondary, fontSize: 24),
         ),
@@ -46,12 +49,16 @@ class _settingsTabState extends State<settingsTab> {
               DropdownMenuItem(
                 value: "en",
                 child: const Text("English"),
-                onTap: () {},
+                onTap: () {
+                  context.setLocale(const Locale('en'));
+                },
               ),
               DropdownMenuItem(
                 value: "ar",
-                child: const Text("Arabic"),
-                onTap: () {},
+                child: Text("Arabic".tr()),
+                onTap: () {
+                  context.setLocale(const Locale('ar'));
+                },
               ),
             ],
             onChanged: (String? newLanguage) {
@@ -73,7 +80,7 @@ class _settingsTabState extends State<settingsTab> {
         ),
         SizedBox(height: height * 0.02),
         Text(
-          "Mode",
+          "Mode".tr(),
           style: TextStyle(
               color: Theme.of(context).colorScheme.onSecondary, fontSize: 24),
         ),
@@ -119,6 +126,29 @@ class _settingsTabState extends State<settingsTab> {
             elevation: 10,
           ),
         ),
+        const Spacer(),
+        InkWell(
+          onTap: () async {
+            await provider.logout();
+            Navigator.pushReplacementNamed(context, loginScreen.route_name);
+          },
+          child: Container(
+              height: height * 0.05,
+              margin: const EdgeInsets.symmetric(horizontal: 40),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  border:
+                      Border.all(color: Theme.of(context).colorScheme.primary)),
+              child: Center(
+                  child: Text(
+                "logout".tr(),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+              ))),
+        ),
+        SizedBox(
+          height: height * 0.05,
+        )
       ]),
     );
   }
