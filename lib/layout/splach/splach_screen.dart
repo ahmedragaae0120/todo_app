@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/layout/home/home_screen.dart';
-import 'package:todo_app/layout/login/login_screen.dart';
+import 'package:todo_app/layout/intro/intro_screen.dart';
 import 'package:todo_app/shared/providers/auth_provider.dart';
 
 class splachScreen extends StatefulWidget {
@@ -16,19 +17,16 @@ class _splachScreenState extends State<splachScreen> {
   @override
   Widget build(BuildContext context) {
     Future.delayed(
-      Duration(
+      const Duration(
         seconds: 3,
       ),
       () {
         cheekAutologin();
       },
     );
-    return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/images/splash.png"), fit: BoxFit.fill)),
-
-      child: Scaffold(backgroundColor: Colors.transparent,),
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(child: SvgPicture.asset("assets/images/splach logo.svg")),
     );
   }
 
@@ -38,7 +36,7 @@ class _splachScreenState extends State<splachScreen> {
       await provider.retriveDatabaseUserData();
       Navigator.pushReplacementNamed(context, homeSreen.route_name);
     } else {
-      Navigator.pushReplacementNamed(context, loginScreen.route_name);
+      Navigator.pushReplacementNamed(context, IntroScreen.route_name);
     }
   }
 }

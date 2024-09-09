@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:todo_app/model/settings_model.dart';
 import 'package:todo_app/model/task_model.dart';
 import 'package:todo_app/model/user_model.dart';
@@ -15,6 +17,24 @@ class firestoreHelper {
       },
     );
     return reference;
+  }
+
+  static Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   static Future<void> AddUser(
@@ -66,16 +86,56 @@ class firestoreHelper {
     yield* tasksStream;
   }
 
+  static Stream<List<task>> ListenToAllTasks({required String userid}) async* {
+    Stream<QuerySnapshot<task>> taskQueryStrem = getTaskCollecions(userid)
+        .where("isDone", isEqualTo: false)
+        .where("date",
+            isGreaterThanOrEqualTo: DateTime(DateTime.now().year,
+                    DateTime.now().month, DateTime.now().day)
+                .millisecondsSinceEpoch)
+        .snapshots();
+    Stream<List<task>> tasksStream = taskQueryStrem.map((querySnapshot) =>
+        querySnapshot.docs.map((Document) => Document.data()).toList());
+    yield* tasksStream;
+  }
+
+  static Stream<List<task>> ListenToCompletedTasks(
+      {required String userid}) async* {
+    Stream<QuerySnapshot<task>> taskQueryStrem =
+        getTaskCollecions(userid).where("isDone", isEqualTo: true).snapshots();
+    Stream<List<task>> tasksStream = taskQueryStrem.map((querySnapshot) =>
+        querySnapshot.docs.map((Document) => Document.data()).toList());
+    yield* tasksStream;
+  }
+
+  static Stream<List<task>> ListenToHistoryTasks(
+      {required String userid}) async* {
+    Stream<QuerySnapshot<task>> taskQueryStrem = getTaskCollecions(userid)
+        .where("date",
+            isLessThan: DateTime(DateTime.now().year, DateTime.now().month,
+                    DateTime.now().day)
+                .millisecondsSinceEpoch)
+        .snapshots();
+    Stream<List<task>> tasksStream = taskQueryStrem.map((querySnapshot) =>
+        querySnapshot.docs.map((Document) => Document.data()).toList());
+    yield* tasksStream;
+  }
+
   static Future<void> deleteTask(
       {required String userid, required String taskID}) async {
     await getTaskCollecions(userid).doc(taskID).delete();
   }
 
-  static Future<void> editTask(
-      {required String userid,
-      required String taskID,
-      required task task}) async {
-    await getTaskCollecions(userid).doc(taskID).update(task.toFirestore());
+  static Future<void> editTask({
+    required String userid,
+    required String taskID,
+    required String selectedEditTask,
+    String? Title,
+    String? descripTion,
+  }) async {
+    await getTaskCollecions(userid)
+        .doc(taskID)
+        .update({selectedEditTask: Title ?? descripTion});
   }
 
   static Future<void> getIsdone(

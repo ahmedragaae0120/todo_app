@@ -1,0 +1,22 @@
+{
+    "Index" : "Index",
+    "Calendar" : "Calendar",
+    "History" : "History",
+    "Focuse" : "History",
+    "Profile" : "Profile",
+    "All":"All",
+    "Today":"Today",
+    "this week":"this week",
+    "this month":"this month",
+    "Completed":"Completed",
+    "Settings":"Settings",
+    "Lanuage":"Lanuage",
+    "Mode":"Mode",
+    "Arabic":"Arabic",
+    "Add Task":"Add Task",
+    "Enter task title":"Enter task title",
+    "Title can't be empty":"Title can't be empty",
+    "Enter task description":"Enter task description",
+    "Description can't be empty":"Description can't be empty",
+    "logout":"logout"
+}
