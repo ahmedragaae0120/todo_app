@@ -1,7 +1,10 @@
 import 'package:animated_introduction/animated_introduction.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/layout/login/login_screen.dart';
 import 'package:todo_app/layout/register/register_screen.dart';
+import 'package:todo_app/shared/providers/auth_provider.dart';
+import 'package:todo_app/shared/remote/firestore/firestore_helper.dart';
 
 class IntroScreen extends StatelessWidget {
   static const String route_name = "IntroScreen";
@@ -56,6 +59,7 @@ class Welcome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    authprovider providerAuth = Provider.of<authprovider>(context);
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -104,6 +108,27 @@ class Welcome extends StatelessWidget {
                   fontSize: 20,
                 )),
           ),
+          const SizedBox(height: 15),
+          ElevatedButton(
+              onPressed: () async {
+                await firestoreHelper.signInWithGoogle();
+              },
+              style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(300, 48),
+                  side: BorderSide(
+                      color: Theme.of(context).colorScheme.secondary),
+                  backgroundColor: Colors.transparent),
+              child: Row(
+                children: [
+                  Text("Login With Google",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontSize: 20,
+                      )),
+                  const Spacer(),
+                  Image.asset("assets/images/google_PNG19635.png")
+                ],
+              )),
         ],
       ),
     );

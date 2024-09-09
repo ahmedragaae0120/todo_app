@@ -13,6 +13,7 @@ class authprovider extends ChangeNotifier {
     databaseUser = newdatabaseUser;
   }
 
+
   bool isfirebaseAuthUser() {
     if (FirebaseAuth.instance.currentUser == null) return false;
     firebaseAuthUser = FirebaseAuth.instance.currentUser;
@@ -27,7 +28,7 @@ class authprovider extends ChangeNotifier {
     }
   }
 
-  Future<void> logout()async {
+  Future<void> logout() async {
     firebaseAuthUser = null;
     databaseUser = null;
     return await FirebaseAuth.instance.signOut();
