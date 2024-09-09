@@ -18,7 +18,7 @@ class _IndexTabState extends State<IndexTab> {
 
   @override
   Widget build(BuildContext context) {
-    homeProvider providerHome = Provider.of<homeProvider>(context);
+    HomeProvider providerHome = Provider.of<HomeProvider>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: CustomScrollView(

@@ -26,7 +26,7 @@ class _addTaskSheetState extends State<addTaskSheet> {
 
   @override
   Widget build(BuildContext context) {
-    homeProvider providerHome = Provider.of<homeProvider>(context);
+    HomeProvider providerHome = Provider.of<HomeProvider>(context);
     return SingleChildScrollView(
       child: Material(
         color: Colors.transparent,
@@ -124,7 +124,7 @@ class _addTaskSheetState extends State<addTaskSheet> {
   }
 
   Future<void> _selectTime(BuildContext context) async {
-    homeProvider provider = Provider.of<homeProvider>(context, listen: false);
+    HomeProvider provider = Provider.of<HomeProvider>(context, listen: false);
 
     final TimeOfDay? selectedTime = await showTimePicker(
       context: context,
@@ -192,7 +192,7 @@ class _addTaskSheetState extends State<addTaskSheet> {
   }
 
   Future<void> _showDatePicker(BuildContext context) async {
-    homeProvider provider = Provider.of<homeProvider>(context, listen: false);
+    HomeProvider provider = Provider.of<HomeProvider>(context, listen: false);
 
     DateTime? selectedDate = await showDatePicker(
       context: context,

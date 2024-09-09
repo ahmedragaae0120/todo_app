@@ -43,8 +43,7 @@ class _homeSreenState extends State<homeSreen> {
 
   @override
   Widget build(BuildContext context) {
-    authprovider provider = Provider.of<authprovider>(context);
-    homeProvider providerHome = Provider.of<homeProvider>(context);
+    HomeProvider providerHome = Provider.of<HomeProvider>(context);
     bool keyboardIsOpened = MediaQuery.of(context).viewInsets.bottom != 0;
     cheekIsDocSettings();
 

@@ -7,22 +7,22 @@ import 'package:todo_app/model/task_model.dart';
 import 'package:todo_app/shared/providers/auth_provider.dart';
 import 'package:todo_app/shared/reusable_commponets/custom_text_filed.dart';
 
-class editTasksheet extends StatefulWidget {
+class EditTasksheet extends StatefulWidget {
   static const String route_name = "editTasksheet";
   TextEditingController titleController = TextEditingController();
   TextEditingController descreptionController = TextEditingController();
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
-  editTasksheet({super.key});
+  EditTasksheet({super.key});
 
   @override
-  State<editTasksheet> createState() => _addTaskSheetState();
+  State<EditTasksheet> createState() => _addTaskSheetState();
 }
 
-class _addTaskSheetState extends State<editTasksheet> {
+class _addTaskSheetState extends State<EditTasksheet> {
   @override
   Widget build(BuildContext context) {
-    homeProvider providerhome = Provider.of<homeProvider>(context);
+    HomeProvider providerhome = Provider.of<HomeProvider>(context);
     authprovider provider = Provider.of<authprovider>(context);
     final task Task = ModalRoute.of(context)?.settings.arguments as task;
     var height = MediaQuery.of(context).size.height;

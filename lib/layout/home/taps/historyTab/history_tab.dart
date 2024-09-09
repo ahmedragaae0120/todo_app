@@ -38,7 +38,7 @@ class HistoryTab extends StatelessWidget {
             List<task> Tasks = snapshot.data ?? [];
 
             return ListView.separated(
-              itemBuilder: (context, index) => taskWidget(Task: Tasks[index]),
+              itemBuilder: (context, index) => TaskWidget(Task: Tasks[index]),
               separatorBuilder: (BuildContext context, int index) =>
                   const SizedBox(
                 height: 10,

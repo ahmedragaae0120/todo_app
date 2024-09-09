@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/model/task_model.dart';
 
-class homeProvider extends ChangeNotifier {
+class HomeProvider extends ChangeNotifier {
   task? Task;
   int currentIndex = 0;
   bool isTextfiledIsEmpty = true;

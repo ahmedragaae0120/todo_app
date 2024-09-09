@@ -16,8 +16,8 @@ class Showdialogs {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        homeProvider providerHome =
-            Provider.of<homeProvider>(context, listen: false);
+        HomeProvider providerHome =
+            Provider.of<HomeProvider>(context, listen: false);
         authprovider providerauth =
             Provider.of<authprovider>(context, listen: false);
         return AlertDialog(

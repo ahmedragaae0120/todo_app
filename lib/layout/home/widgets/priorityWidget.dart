@@ -19,7 +19,7 @@ class _priorityWidgetState extends State<priorityWidget> {
   // bool isSelected = false;
   @override
   Widget build(BuildContext context) {
-    homeProvider providerHome = Provider.of<homeProvider>(context);
+    HomeProvider providerHome = Provider.of<HomeProvider>(context);
     bool isSelected = providerHome.priorityIndex == widget.index - 1;
     return widget.widgetDirection == WidgetDirection.vertical.direction
         ? InkWell(

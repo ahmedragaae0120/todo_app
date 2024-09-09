@@ -1,6 +1,4 @@
 import 'dart:developer';
-
-import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -22,9 +20,8 @@ class _listTabState extends State<listTab> {
   DateTime? selectedDay;
   @override
   Widget build(BuildContext context) {
-    homeProvider provider = Provider.of<homeProvider>(context);
+    HomeProvider provider = Provider.of<HomeProvider>(context);
     authprovider providerauth = Provider.of<authprovider>(context);
-    var height = MediaQuery.of(context).size.height;
 
     return Column(
       children: [
@@ -92,7 +89,6 @@ class _listTabState extends State<listTab> {
                     formatButtonVisible: false,
                     titleCentered: true,
                     titleTextStyle: TextStyle(color: Colors.white),
-                    
                     leftChevronIcon: Icon(
                       Icons.chevron_left,
                       color: Colors.white,
@@ -136,7 +132,7 @@ class _listTabState extends State<listTab> {
               List<task> tasks = snapshot.data ?? [];
               return ListView.separated(
                   itemBuilder: (context, index) {
-                    return taskWidget(Task: tasks[index]);
+                    return TaskWidget(Task: tasks[index]);
                   },
                   separatorBuilder: (context, index) =>
                       const SizedBox(height: 15),

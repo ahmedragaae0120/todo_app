@@ -1,13 +1,11 @@
 import 'dart:developer';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/layout/home/provider/home_provider.dart';
 import 'package:todo_app/layout/home/widgets/detailsTask_widget.dart';
-import 'package:todo_app/layout/home/widgets/dialog.dart';
 import 'package:todo_app/layout/home/widgets/editTasksheet.dart';
 import 'package:todo_app/layout/home/widgets/priorityWidget.dart';
 import 'package:todo_app/model/task_model.dart';
@@ -15,16 +13,16 @@ import 'package:todo_app/shared/providers/auth_provider.dart';
 import 'package:todo_app/shared/remote/firestore/firestore_helper.dart';
 import 'package:todo_app/style/app_colors.dart';
 
-class taskWidget extends StatelessWidget {
+class TaskWidget extends StatelessWidget {
   task Task;
-  taskWidget({super.key, required this.Task});
+  TaskWidget({super.key, required this.Task});
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     DateTime taskDate = DateTime.fromMillisecondsSinceEpoch(Task.date ?? 0);
     authprovider provider = Provider.of<authprovider>(context);
-    homeProvider providerhome = Provider.of<homeProvider>(context);
+    HomeProvider providerhome = Provider.of<HomeProvider>(context);
     return Slidable(
       startActionPane:
           ActionPane(motion: const ScrollMotion(), extentRatio: 0.4, children: [
@@ -45,7 +43,7 @@ class taskWidget extends StatelessWidget {
             )),
         SlidableAction(
             onPressed: (context) {
-              Navigator.pushNamed(context, editTasksheet.route_name,
+              Navigator.pushNamed(context, EditTasksheet.route_name,
                   arguments: Task);
             },
             backgroundColor: Colors.grey,

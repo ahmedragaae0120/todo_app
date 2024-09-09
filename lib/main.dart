@@ -23,23 +23,23 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => authprovider()),
-        ChangeNotifierProvider(create: (context) => homeProvider()),
+        ChangeNotifierProvider(create: (context) => HomeProvider()),
       ],
       child: EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('ar')],
         path: 'assets/translations', // مسار ملفات الترجمة
         fallbackLocale: const Locale('en'),
-        child: const todoApp(),
+        child: const TodoApp(),
       ),
     ),
   );
 }
 
-class todoApp extends StatelessWidget {
-  const todoApp({super.key});
+class TodoApp extends StatelessWidget {
+  const TodoApp({super.key});
   @override
   Widget build(BuildContext context) {
-    homeProvider providerHome = Provider.of<homeProvider>(context);
+    HomeProvider providerHome = Provider.of<HomeProvider>(context);
     return MaterialApp(
       locale: context.locale,
       supportedLocales: context.supportedLocales,
@@ -57,7 +57,7 @@ class todoApp extends StatelessWidget {
         loginScreen.route_name: (context) => const loginScreen(),
         registerScreen.route_name: (context) => const registerScreen(),
         homeSreen.route_name: (context) => const homeSreen(),
-        editTasksheet.route_name: (context) => editTasksheet(),
+        EditTasksheet.route_name: (context) => EditTasksheet(),
         splachScreen.route_name: (context) => const splachScreen(),
         IntroScreen.route_name: (context) => const IntroScreen(),
       },

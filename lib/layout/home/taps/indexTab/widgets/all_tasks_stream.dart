@@ -12,7 +12,7 @@ class AllTasksStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     authprovider providerAuth = Provider.of<authprovider>(context);
-    homeProvider providerHome = Provider.of<homeProvider>(context);
+    HomeProvider providerHome = Provider.of<HomeProvider>(context);
 
     return StreamBuilder(
       stream: firestoreHelper.ListenToAllTasks(
@@ -44,7 +44,7 @@ class AllTasksStream extends StatelessWidget {
               .changeListOfAllTasksIsEmpty(tasks.isEmpty ? true : false);
         });
         return SliverList.separated(
-          itemBuilder: (context, index) => taskWidget(Task: tasks[index]),
+          itemBuilder: (context, index) => TaskWidget(Task: tasks[index]),
           separatorBuilder: (context, index) => const SizedBox(height: 10),
           itemCount: tasks.length,
         );

@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/layout/home/provider/home_provider.dart';
 import 'package:todo_app/model/task_model.dart';
 import 'package:todo_app/shared/providers/auth_provider.dart';
 import 'package:todo_app/shared/remote/firestore/firestore_helper.dart';
@@ -15,7 +14,6 @@ class DetailstaskWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime taskDate = DateTime.fromMillisecondsSinceEpoch(Task.date ?? 0);
-    homeProvider providerhome = Provider.of<homeProvider>(context);
     authprovider provider = Provider.of<authprovider>(context);
     return Dialog(
       backgroundColor: Colors.transparent,
